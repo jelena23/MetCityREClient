@@ -1,0 +1,165 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Municipality</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel='stylesheet' href='http://mottie.github.com/tablesorter/css/theme.blue.css'>
+        <link rel='stylesheet' href='http://mottie.github.com/tablesorter/addons/pager/jquery.tablesorter.pager.css'>
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'></script>
+        <script src='http://mottie.github.com/tablesorter/js/jquery.tablesorter.min.js'></script>
+        <script src='http://mottie.github.com/tablesorter/addons/pager/jquery.tablesorter.pager.js'></script>
+        <script src='MunicipalityClient.js'></script>
+    </head>
+    <body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Met City Real Estate</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Location<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="country.html">Country</a></li>
+                    <li><a href="city.html">City</a></li>
+                    <li><a href="municipality.html">Municipality</a></li>
+                </ul>
+                </li>
+                <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Real Estate<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="realEstate.html">Real Estate</a></li>
+                    <li><a href="realEstateType.html">Real Estate Types</a></li>
+                    <li><a href="type.html">Types</a></li>
+                </ul>
+                </li>
+                <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Agreements<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="salesAgreement.html">Sales Agreements</a></li>
+                    <li><a href="rentalAgreement.html">Rental Agreements</a></li>
+                </ul>
+                </li>
+                <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Users<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="user.html">Users</a></li>
+                    <li><a href="userType.html">User Types</a></li>
+                </ul>
+                </li>
+            </ul>
+<!--          <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>-->
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+        <table id='datatable' class='tablesorter-blue'>
+        </table>
+        <div class='pager' id='pager'>
+            <img src='http://mottie.github.com/tablesorter/addons/pager/icons/first.png' class='first' alt='First'/>
+            <img src='http://mottie.github.com/tablesorter/addons/pager/icons/prev.png' class='prev' alt='Prev'/>
+            <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
+            <img src='http://mottie.github.com/tablesorter/addons/pager/icons/next.png' class='next' alt='Next'/>
+            <img src='http://mottie.github.com/tablesorter/addons/pager/icons/last.png' class='last' alt='Last'/>
+            <select class='pagesize'>
+                <option selected='selected' value='10'>10</option>
+                <option value='20'>20</option>
+                <option value='30'>30</option>
+                <option value='40'>40</option>
+            </select>
+        </div>
+        <br>
+
+        <div id='details'></div>
+
+
+        <!-- Templates -->
+        
+
+        <script type='text/template' id='thead'>
+            <thead>
+            <tr>
+            <th>Municipality ID</th>
+            <th>Municipality Name</th>
+            <th>City</th>
+            </tr>
+            </thead>
+        </script>
+        <script type='text/template' id='tpl-municipality-list-item'>
+            <td><a href='#<%= idMunicipality %>'><%= idMunicipality %></a></td>
+            <td><%= municipalityName %></td>
+            <td><%= idCity.cityName %></td>
+        </script>
+        
+        <div id='create'></div>
+        <script type='text/template' id='tpl-create'>
+            <!--
+            Put your controls to create new entity here.
+
+            Class 'new' is used to listen on events in JS code.
+            -->
+            <button class='new'>Create</button>
+        </script>
+        
+        <script type='text/template' id='tpl-municipality-details'>
+            <div>
+            <table>
+            <tbody>
+            <tr><td>ID</td>
+            <td>
+            <input type='text' id='idMunicipality' name='id' value='<%= typeof(idMunicipality)!== "undefined" ? idMunicipality : "" %>'  />
+            </td>
+            </tr>
+            <tr>
+            <td>Municipality Name</td><td><input type='text' id='municipalityName' name='municipalityName' value='<%= municipalityName %>'/></td></tr>
+            </tbody>
+            </table>
+            <!--
+            Put your controls to create new entity here.
+            Classes 'save' and 'delete' are used to listen on events in JS code.
+            -->
+            <button  class='save'>Save</button>
+            <button  class='delete'>Delete</button>
+            </div>
+        </script>
+
+
+    </body>
+</html>
